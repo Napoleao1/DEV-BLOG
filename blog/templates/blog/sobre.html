@@ -1,0 +1,274 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Sobre · DevBlog{% endblock %}
+
+{% block extra_head %}
+<style>
+    /* ===== Estilos específicos da página Sobre ===== */
+
+    /* Hero com gradiente escuro (combinando com a navbar) */
+    .hero-sobre {
+        background: linear-gradient(135deg, #1a1d20 0%, #343a40 55%, #495057 100%);
+        color: #fff;
+        border-radius: 1rem;
+    }
+
+    /* Ícone redondo dos cartões de destaque */
+    .destaque-icon {
+        width: 3rem;
+        height: 3rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 1.35rem;
+    }
+
+    /* Selos de tecnologia */
+    .tech-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        padding: .5rem .9rem;
+        border: 1px solid #dee2e6;
+        border-radius: 2rem;
+        background: #fff;
+        font-weight: 500;
+        transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .tech-pill:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 .35rem .75rem rgba(0, 0, 0, .08);
+    }
+    .tech-pill i { font-size: 1.25rem; }
+
+    /* Trilha de aulas (timeline com linha conectora) */
+    .trilha-item { display: flex; gap: 1rem; }
+    .trilha-eixo { display: flex; flex-direction: column; align-items: center; }
+    .trilha-dot {
+        flex: 0 0 auto;
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 1rem;
+    }
+    .trilha-eixo::after {
+        content: "";
+        flex: 1 1 auto;
+        width: 2px;
+        background: #dee2e6;
+        margin: .35rem 0;
+    }
+    .trilha-item:last-child .trilha-eixo::after { display: none; }
+    .trilha-corpo { flex: 1 1 auto; padding-bottom: 1.5rem; }
+    .trilha-item:last-child .trilha-corpo { padding-bottom: 0; }
+</style>
+{% endblock %}
+
+{% block content %}
+    <!-- Cabeçalho / Hero -->
+    <section class="hero-sobre p-4 p-md-5 mb-4 shadow-sm">
+        <div class="text-center mx-auto" style="max-width: 720px;">
+            <span class="badge bg-light text-dark mb-3"><i class="bi bi-info-circle"></i> Sobre o projeto</span>
+            <h1 class="display-5 fw-bold mb-3">Bem-vindo ao DevBlog</h1>
+            <p class="lead mb-4" style="color: rgba(255, 255, 255, .85);">
+                Um blog construído do zero com Django, criado pela Turma Python para
+                compartilhar descobertas, dicas e novidades do mundo da programação —
+                e, acima de tudo, para aprender na prática.
+            </p>
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+                <span class="badge rounded-pill bg-primary px-3 py-2"><i class="bi bi-filetype-py"></i> Python</span>
+                <span class="badge rounded-pill bg-success px-3 py-2"><i class="bi bi-server"></i> Django</span>
+                <span class="badge rounded-pill px-3 py-2" style="background:#6f42c1;"><i class="bi bi-bootstrap"></i> Bootstrap 5</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destaques rápidos -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <span class="destaque-icon bg-success-subtle text-success mb-3"><i class="bi bi-mortarboard-fill"></i></span>
+                    <h3 class="h6 fw-bold">Projeto de curso</h3>
+                    <p class="small text-secondary mb-0">Nascido no curso de Python e construído aula após aula.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <span class="destaque-icon bg-warning-subtle text-warning-emphasis mb-3"><i class="bi bi-lightbulb-fill"></i></span>
+                    <h3 class="h6 fw-bold">Aprendizado prático</h3>
+                    <p class="small text-secondary mb-0">100% mão na massa: cada conceito vira código de verdade.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <span class="destaque-icon bg-primary-subtle text-primary mb-3"><i class="bi bi-people-fill"></i></span>
+                    <h3 class="h6 fw-bold">Feito em equipe</h3>
+                    <p class="small text-secondary mb-0">Desenvolvido em conjunto pela Turma Python.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- O Projeto -->
+        <div class="col-lg-6">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title h4"><i class="bi bi-rocket-takeoff text-dark"></i> O Projeto</h2>
+                    <p class="card-text mb-0">
+                        O DevBlog nasceu como um projeto prático do curso de Python. A ideia é
+                        construir, do zero, um blog completo usando o framework <strong>Django</strong>,
+                        passando por rotas, views, templates e banco de dados. Mais do que publicar
+                        artigos, o objetivo é entender, na prática, como uma aplicação web é estruturada
+                        e como cada peça se encaixa.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- O que estamos construindo -->
+        <div class="col-lg-6">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title h4"><i class="bi bi-tools text-dark"></i> O que estamos construindo</h2>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item px-0">
+                            <strong>Rotas e Views:</strong> mapeamento de URLs para as funções que respondem cada página.
+                        </li>
+                        <li class="list-group-item px-0">
+                            <strong>Templates:</strong> herança de layout com o sistema de templates do Django.
+                        </li>
+                        <li class="list-group-item px-0">
+                            <strong>Banco de Dados:</strong> modelagem dos artigos e integração com o ORM do Django.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tecnologias -->
+    <div class="card border-0 shadow-sm mt-4">
+        <div class="card-body">
+            <h2 class="card-title h4 mb-3"><i class="bi bi-stack text-dark"></i> Tecnologias que usamos</h2>
+            <div class="d-flex flex-wrap gap-2">
+                <span class="tech-pill"><i class="bi bi-filetype-py text-primary"></i> Python</span>
+                <span class="tech-pill"><i class="bi bi-server text-success"></i> Django</span>
+                <span class="tech-pill"><i class="bi bi-bootstrap" style="color:#6f42c1;"></i> Bootstrap 5</span>
+                <span class="tech-pill"><i class="bi bi-database text-info"></i> SQLite</span>
+                <span class="tech-pill"><i class="bi bi-filetype-html text-danger"></i> HTML5</span>
+                <span class="tech-pill"><i class="bi bi-git text-warning"></i> Git</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trilha de Aulas -->
+    <div class="card border-0 shadow-sm mt-4">
+        <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                <h2 class="card-title h4 mb-0"><i class="bi bi-signpost-split text-dark"></i> Trilha de Aulas</h2>
+                <span class="text-secondary small">2 de 5 etapas concluídas</span>
+            </div>
+
+            <div class="progress mb-4" role="progressbar" aria-label="Progresso do curso"
+                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="height: .6rem;">
+                <div class="progress-bar bg-success" style="width: 40%;"></div>
+            </div>
+
+            <div class="trilha">
+                <!-- Concluída -->
+                <div class="trilha-item">
+                    <div class="trilha-eixo">
+                        <span class="trilha-dot bg-success"><i class="bi bi-check-lg"></i></span>
+                    </div>
+                    <div class="trilha-corpo">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center">
+                            <h3 class="h6 fw-bold mb-1">Configuração inicial do projeto Django</h3>
+                            <span class="badge bg-success-subtle text-success-emphasis rounded-pill">Concluída</span>
+                        </div>
+                        <p class="small text-secondary mb-0">Criação do projeto, do app e os primeiros ajustes de configuração.</p>
+                    </div>
+                </div>
+
+                <!-- Concluída -->
+                <div class="trilha-item">
+                    <div class="trilha-eixo">
+                        <span class="trilha-dot bg-success"><i class="bi bi-check-lg"></i></span>
+                    </div>
+                    <div class="trilha-corpo">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center">
+                            <h3 class="h6 fw-bold mb-1">Criação das rotas e views</h3>
+                            <span class="badge bg-success-subtle text-success-emphasis rounded-pill">Concluída</span>
+                        </div>
+                        <p class="small text-secondary mb-0">Mapeamento de URLs para as funções que respondem cada página.</p>
+                    </div>
+                </div>
+
+                <!-- Em andamento -->
+                <div class="trilha-item">
+                    <div class="trilha-eixo">
+                        <span class="trilha-dot bg-warning" style="color:#212529;"><i class="bi bi-hourglass-split"></i></span>
+                    </div>
+                    <div class="trilha-corpo">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center">
+                            <h3 class="h6 fw-bold mb-1">Templates com herança</h3>
+                            <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill">Em andamento</span>
+                        </div>
+                        <p class="small text-secondary mb-0">Reaproveitando um layout base entre as páginas com herança de templates.</p>
+                    </div>
+                </div>
+
+                <!-- Em breve -->
+                <div class="trilha-item">
+                    <div class="trilha-eixo">
+                        <span class="trilha-dot bg-secondary"><i class="bi bi-clock-history"></i></span>
+                    </div>
+                    <div class="trilha-corpo">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center">
+                            <h3 class="h6 fw-bold mb-1">Modelos e banco de dados</h3>
+                            <span class="badge bg-secondary-subtle text-secondary-emphasis rounded-pill">Em breve</span>
+                        </div>
+                        <p class="small text-secondary mb-0">Modelagem dos artigos e migrações com o ORM do Django.</p>
+                    </div>
+                </div>
+
+                <!-- Em breve -->
+                <div class="trilha-item">
+                    <div class="trilha-eixo">
+                        <span class="trilha-dot bg-secondary"><i class="bi bi-clock-history"></i></span>
+                    </div>
+                    <div class="trilha-corpo">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center">
+                            <h3 class="h6 fw-bold mb-1">Listagem e detalhe dos artigos</h3>
+                            <span class="badge bg-secondary-subtle text-secondary-emphasis rounded-pill">Em breve</span>
+                        </div>
+                        <p class="small text-secondary mb-0">Páginas dinâmicas que leem e exibem os artigos do banco.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chamada para ação -->
+    <div class="text-center my-5">
+        <h2 class="h4 fw-bold mb-3">Pronto para conferir os artigos?</h2>
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+            <a href="/" class="btn btn-dark btn-lg">
+                <i class="bi bi-newspaper"></i> Ver as últimas notícias
+            </a>
+            <a href="#" class="btn btn-outline-dark btn-lg">
+                <i class="bi bi-arrow-up"></i> Voltar ao topo
+            </a>
+        </div>
+    </div>
+{% endblock %}
