@@ -1,4 +1,5 @@
 {% extends 'blog/base.html' %}
+{% load static %}
 
 {% block title %}Sobre · DevBlog{% endblock %}
 
@@ -80,11 +81,17 @@
                 compartilhar descobertas, dicas e novidades do mundo da programação —
                 e, acima de tudo, para aprender na prática.
             </p>
-            <div class="d-flex flex-wrap justify-content-center gap-2">
+            <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
                 <span class="badge rounded-pill bg-primary px-3 py-2"><i class="bi bi-filetype-py"></i> Python</span>
                 <span class="badge rounded-pill bg-success px-3 py-2"><i class="bi bi-server"></i> Django</span>
                 <span class="badge rounded-pill px-3 py-2" style="background:#6f42c1;"><i class="bi bi-bootstrap"></i> Bootstrap 5</span>
             </div>
+
+            <!-- Imagem do projeto (carregada da pasta static) -->
+            <img src="{% static 'blog/images/logo.png' %}"
+                 alt="Logo do DevBlog"
+                 class="img-fluid rounded shadow"
+                 style="max-width: 280px;">
         </div>
     </section>
 
