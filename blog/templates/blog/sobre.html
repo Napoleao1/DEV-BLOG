@@ -7,8 +7,19 @@
 <style>
     /* ===== Estilos específicos da página Sobre ===== */
 
-    /* Imagem de fundo cobrindo a página inteira */
+    /* Paleta estilo "syntax highlighting" (VS Code Dark) */
+    :root {
+        --tech-accent: #22d3ee;   /* ciano  */
+        --code-key:    #c586c0;   /* roxo   (palavras-chave) */
+        --code-str:    #ce9178;   /* laranja(strings)        */
+        --code-fn:     #dcdcaa;   /* amarelo(funções)        */
+        --code-var:    #9cdcfe;   /* azul   (variáveis)      */
+        --code-num:    #b5cea8;   /* verde  (números)        */
+    }
+
+    /* Imagem de fundo + fonte estilo "código" em toda a página Sobre */
     body {
+        font-family: "Cascadia Code", "Fira Code", Consolas, "Courier New", ui-monospace, monospace;
         background-color: transparent !important;
         background-image:
             linear-gradient(rgba(41, 36, 36, 0.35), rgba(34, 30, 30, 0.35)),
@@ -27,6 +38,50 @@
         border: none;
         box-shadow: none !important;
     }
+
+    /* ===== Cartões com efeito "espelhado" (vidro escuro + gradiente) ===== */
+    .card-vidro {
+        background: linear-gradient(150deg, rgba(60, 63, 71, 0.13), rgba(25, 26, 29, 0.247));
+        backdrop-filter: blur(22px) saturate(150%);
+        -webkit-backdrop-filter: blur(22px) saturate(150%);
+        border: 1px solid rgba(255, 255, 255, .25) !important;
+        border-radius: 1rem;
+        color: #9aa4b2;
+        /* sombra + fio de luz na borda de cima (reflexo do "espelho") */
+        box-shadow: 0 .6rem 2rem rgba(0, 0, 0, .4),
+                    inset 0 1px 0 rgba(255, 255, 255, .22) !important;
+        transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .card-vidro:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 1rem 2.6rem rgba(0, 0, 0, .5),
+                    inset 0 1px 0 rgba(255, 255, 255, .22) !important;
+    }
+
+    /* Textos claros dentro do vidro escuro */
+    .card-vidro .card-title,
+    .card-vidro h1, .card-vidro h2, .card-vidro h3 { color: #fff; }
+    .card-vidro .text-secondary { color: rgba(255, 255, 255, .72) !important; }
+    .card-vidro i.text-dark { color: #fff !important; }
+
+    /* Lista transparente sobre o vidro */
+    .card-vidro .list-group-item {
+        background: transparent;
+        color: #9aa4b2;
+        border-color: rgba(255, 255, 255, .14);
+    }
+
+    /* Acentos "tech": glow ciano nos títulos e borda dos cards no hover */
+    .card-vidro .card-title { text-shadow: 0 0 12px rgba(34, 211, 238, .35); }
+    .card-vidro:hover { border-color: rgba(34, 211, 238, .55) !important; }
+    .card-vidro .card-title i.text-dark { color: var(--tech-accent) !important; }
+
+    /* Destaques coloridos, estilo código: negrito = keyword (roxo),
+       rótulos da lista = variável (azul) */
+    .card-vidro .card-text strong { color: var(--code-key); font-weight: 600; }
+    .card-vidro .list-group-item strong { color: var(--code-var); font-weight: 600; }
+    .card-vidro .destaque-icon + h3 + p,
+    .card-vidro .trilha-corpo p { color: #9aa4b2 !important; }
 
     /* Ícone redondo dos cartões de destaque */
     .destaque-icon {
@@ -48,12 +103,16 @@
         border: 1px solid #dee2e6;
         border-radius: 2rem;
         background: #fff;
+        color: #212529;
         font-weight: 500;
-        transition: transform .15s ease, box-shadow .15s ease;
+        text-decoration: none;
+        transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
     }
     .tech-pill:hover {
         transform: translateY(-2px);
-        box-shadow: 0 .35rem .75rem rgba(0, 0, 0, .08);
+        box-shadow: 0 .35rem .75rem rgba(0, 0, 0, .18);
+        border-color: var(--tech-accent);
+        color: #212529;
     }
     .tech-pill i { font-size: 1.25rem; }
 
@@ -111,7 +170,7 @@
     <!-- Destaques rápidos -->
     <div class="row g-3 mb-4">
         <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm text-center">
+            <div class="card card-vidro h-100 border-0 shadow-sm text-center">
                 <div class="card-body">
                     <span class="destaque-icon bg-success-subtle text-success mb-3"><i class="bi bi-mortarboard-fill"></i></span>
                     <h3 class="h6 fw-bold">Projeto de curso</h3>
@@ -120,7 +179,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm text-center">
+            <div class="card card-vidro h-100 border-0 shadow-sm text-center">
                 <div class="card-body">
                     <span class="destaque-icon bg-warning-subtle text-warning-emphasis mb-3"><i class="bi bi-lightbulb-fill"></i></span>
                     <h3 class="h6 fw-bold">Aprendizado prático</h3>
@@ -129,7 +188,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm text-center">
+            <div class="card card-vidro h-100 border-0 shadow-sm text-center">
                 <div class="card-body">
                     <span class="destaque-icon bg-primary-subtle text-primary mb-3"><i class="bi bi-arrow-repeat"></i></span>
                     <h3 class="h6 fw-bold">Sempre em evolução</h3>
@@ -142,7 +201,7 @@
     <div class="row g-4">
         <!-- O Projeto -->
         <div class="col-lg-6">
-            <div class="card h-100 border-0 shadow-sm">
+            <div class="card card-vidro h-100 border-0 shadow-sm">
                 <div class="card-body">
                     <h2 class="card-title h4"><i class="bi bi-rocket-takeoff text-dark"></i> O Projeto</h2>
                     <p class="card-text mb-0">
@@ -158,7 +217,7 @@
 
         <!-- O que estamos construindo -->
         <div class="col-lg-6">
-            <div class="card h-100 border-0 shadow-sm">
+            <div class="card card-vidro h-100 border-0 shadow-sm">
                 <div class="card-body">
                     <h2 class="card-title h4"><i class="bi bi-tools text-dark"></i> O que estamos construindo</h2>
                     <ul class="list-group list-group-flush">
@@ -178,31 +237,38 @@
     </div>
 
     <!-- Tecnologias -->
-    <div class="card border-0 shadow-sm mt-4">
+    <div class="card card-vidro border-0 shadow-sm mt-4">
         <div class="card-body">
             <h2 class="card-title h4 mb-3"><i class="bi bi-stack text-dark"></i> Tecnologias que usamos</h2>
+            <p class="small text-secondary mb-3">Clique em uma tecnologia para abrir a documentação oficial.</p>
             <div class="d-flex flex-wrap gap-2">
-                <span class="tech-pill"><i class="bi bi-filetype-py text-primary"></i> Python</span>
-                <span class="tech-pill"><i class="bi bi-server text-success"></i> Django</span>
-                <span class="tech-pill"><i class="bi bi-bootstrap" style="color:#6f42c1;"></i> Bootstrap 5</span>
-                <span class="tech-pill"><i class="bi bi-database text-info"></i> SQLite</span>
-                <span class="tech-pill"><i class="bi bi-filetype-html text-danger"></i> HTML5</span>
-                <span class="tech-pill"><i class="bi bi-git text-warning"></i> Git</span>
+                <a class="tech-pill" href="https://docs.python.org/3/" target="_blank" rel="noopener">
+                    <i class="bi bi-filetype-py text-primary"></i> Python</a>
+                <a class="tech-pill" href="https://docs.djangoproject.com/en/stable/" target="_blank" rel="noopener">
+                    <i class="bi bi-server text-success"></i> Django</a>
+                <a class="tech-pill" href="https://getbootstrap.com/docs/5.3/" target="_blank" rel="noopener">
+                    <i class="bi bi-bootstrap" style="color:#6f42c1;"></i> Bootstrap 5</a>
+                <a class="tech-pill" href="https://www.sqlite.org/docs.html" target="_blank" rel="noopener">
+                    <i class="bi bi-database text-info"></i> SQLite</a>
+                <a class="tech-pill" href="https://developer.mozilla.org/pt-BR/docs/Web/HTML" target="_blank" rel="noopener">
+                    <i class="bi bi-filetype-html text-danger"></i> HTML5</a>
+                <a class="tech-pill" href="https://git-scm.com/doc" target="_blank" rel="noopener">
+                    <i class="bi bi-git text-warning"></i> Git</a>
             </div>
         </div>
     </div>
 
     <!-- Trilha de Aulas -->
-    <div class="card border-0 shadow-sm mt-4">
+    <div class="card card-vidro border-0 shadow-sm mt-4">
         <div class="card-body">
             <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
                 <h2 class="card-title h4 mb-0"><i class="bi bi-signpost-split text-dark"></i> Trilha de Aulas</h2>
-                <span class="text-secondary small">2 de 5 etapas concluídas</span>
+                <span class="text-secondary small">3 de 5 etapas concluídas</span>
             </div>
 
             <div class="progress mb-4" role="progressbar" aria-label="Progresso do curso"
-                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="height: .6rem;">
-                <div class="progress-bar bg-success" style="width: 40%;"></div>
+                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: .6rem;">
+                <div class="progress-bar bg-success" style="width: 60%;"></div>
             </div>
 
             <div class="trilha">
@@ -234,6 +300,20 @@
                     </div>
                 </div>
 
+                <!-- Concluída -->
+                <div class="trilha-item">
+                    <div class="trilha-eixo">
+                        <span class="trilha-dot bg-success"><i class="bi bi-check-lg"></i></span>
+                    </div>
+                    <div class="trilha-corpo">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center">
+                            <h3 class="h6 fw-bold mb-1">Templates com herança</h3>
+                            <span class="badge bg-success-subtle text-success-emphasis rounded-pill">Concluída</span>
+                        </div>
+                        <p class="small text-secondary mb-0">Reaproveitando um layout base entre as páginas com herança de templates.</p>
+                    </div>
+                </div>
+
                 <!-- Em andamento -->
                 <div class="trilha-item">
                     <div class="trilha-eixo">
@@ -241,22 +321,8 @@
                     </div>
                     <div class="trilha-corpo">
                         <div class="d-flex flex-wrap justify-content-between align-items-center">
-                            <h3 class="h6 fw-bold mb-1">Templates com herança</h3>
-                            <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill">Em andamento</span>
-                        </div>
-                        <p class="small text-secondary mb-0">Reaproveitando um layout base entre as páginas com herança de templates.</p>
-                    </div>
-                </div>
-
-                <!-- Em breve -->
-                <div class="trilha-item">
-                    <div class="trilha-eixo">
-                        <span class="trilha-dot bg-secondary"><i class="bi bi-clock-history"></i></span>
-                    </div>
-                    <div class="trilha-corpo">
-                        <div class="d-flex flex-wrap justify-content-between align-items-center">
                             <h3 class="h6 fw-bold mb-1">Modelos e banco de dados</h3>
-                            <span class="badge bg-secondary-subtle text-secondary-emphasis rounded-pill">Em breve</span>
+                            <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill">Em andamento</span>
                         </div>
                         <p class="small text-secondary mb-0">Modelagem dos artigos e migrações com o ORM do Django.</p>
                     </div>
