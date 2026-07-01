@@ -7,11 +7,25 @@
 <style>
     /* ===== Estilos específicos da página Sobre ===== */
 
-    /* Hero com gradiente escuro (combinando com a navbar) */
+    /* Imagem de fundo cobrindo a página inteira */
+    body {
+        background-color: transparent !important;
+        background-image:
+            linear-gradient(rgba(41, 36, 36, 0.35), rgba(34, 30, 30, 0.35)),
+            url("{% static 'blog/images/main.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    /* Hero com imagem de fundo + camada escura por cima */
     .hero-sobre {
-        background: linear-gradient(135deg, #1a1d20 0%, #343a40 55%, #495057 100%);
+        background: transparent;
         color: #fff;
         border-radius: 1rem;
+        border: none;
+        box-shadow: none !important;
     }
 
     /* Ícone redondo dos cartões de destaque */
@@ -78,7 +92,7 @@
             <h1 class="display-5 fw-bold mb-3">Bem-vindo ao DevBlog</h1>
             <p class="lead mb-4" style="color: rgba(255, 255, 255, .85);">
                 Um blog construído do zero com Django, criado pela Turma Python para
-                compartilhar descobertas, dicas e novidades do mundo da programação —
+                compartilhar descobertas, dicas e novidades do mundo da programação 
                 e, acima de tudo, para aprender na prática.
             </p>
             <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
@@ -87,11 +101,10 @@
                 <span class="badge rounded-pill px-3 py-2" style="background:#6f42c1;"><i class="bi bi-bootstrap"></i> Bootstrap 5</span>
             </div>
 
-            <!-- Imagem do projeto (carregada da pasta static) -->
             <img src="{% static 'blog/images/logo.png' %}"
                  alt="Logo do DevBlog"
-                 class="img-fluid rounded shadow"
-                 style="max-width: 280px;">
+                 class="img-fluid shadow mt-4 mb-3"
+                 style="max-width: 400px; opacity: .55; transform: scale(1.2); border-radius: 1.75rem;">
         </div>
     </section>
 
@@ -118,9 +131,9 @@
         <div class="col-md-4">
             <div class="card h-100 border-0 shadow-sm text-center">
                 <div class="card-body">
-                    <span class="destaque-icon bg-primary-subtle text-primary mb-3"><i class="bi bi-people-fill"></i></span>
-                    <h3 class="h6 fw-bold">Feito em equipe</h3>
-                    <p class="small text-secondary mb-0">Desenvolvido em conjunto pela Turma Python.</p>
+                    <span class="destaque-icon bg-primary-subtle text-primary mb-3"><i class="bi bi-arrow-repeat"></i></span>
+                    <h3 class="h6 fw-bold">Sempre em evolução</h3>
+                    <p class="small text-secondary mb-0">Novos recursos e melhorias chegam a cada aula do curso.</p>
                 </div>
             </div>
         </div>
@@ -267,13 +280,13 @@
     </div>
 
     <!-- Chamada para ação -->
-    <div class="text-center my-5">
-        <h2 class="h4 fw-bold mb-3">Pronto para conferir os artigos?</h2>
+    <div class="text-center my-5" class="d-flex justify-content-center">
+        <h2 class="h4 fw-bold mb-3 text-white">Pronto para conferir os artigos?</h2>
         <div class="d-flex flex-wrap justify-content-center gap-2">
             <a href="/" class="btn btn-dark btn-lg">
-                <i class="bi bi-newspaper"></i> Ver as últimas notícias
+                <i class="bi bi-newspaper" ></i> Ver as últimas notícias
             </a>
-            <a href="#" class="btn btn-outline-dark btn-lg">
+            <a href="#" class="btn btn-outline-dark btn-lg text-white">
                 <i class="bi bi-arrow-up"></i> Voltar ao topo
             </a>
         </div>
