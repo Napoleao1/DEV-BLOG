@@ -24,6 +24,23 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'home' %}">Início</a>
                     </li>
+
+                    <!-- MENU DE CATEGORIAS DINÂMICO -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categorias
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            {% for categoria in lista_categorias %}
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'categoria' categoria.id %}"><i class="bi bi-tag-fill me-2"></i>{{ categoria.nome }}</a>
+                                </li>
+                            {% empty %}
+                                <li><span class="dropdown-item-text text-muted">Nenhuma categoria</span></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'sobre_nos' %}">Sobre</a>
                     </li>
@@ -40,7 +57,7 @@
 
     <!-- RODAPÉ -->
     <footer class="bg-dark text-white text-center py-4 mt-5">
-        <p class="mb-0">© 2026 Desenvolvido pela Turma Python. Todos os direitos reservados.</p>
+        <p class="mb-0">© 2026 Desenvolvido por Ernani. Todos os direitos reservados.</p>
     </footer>
 
     <!-- Bootstrap 5 JS (necessário para a navbar responsiva) -->

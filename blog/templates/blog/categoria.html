@@ -1,0 +1,24 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <h2>Categoria: {{ categoria.nome }}</h2>
+
+    {% for artigo in lista_artigos %}
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h3 class="card-title text-sucess">{{ artigo.titulo }}</h3>
+                <h6 class="card-subtitle mb-2 text-muted">Categoria: {{ artigo.categoria.nome }} | Autor: {{ artigo.autor }}</h6>
+                <p class="card-text"> {{ artigo.conteudo }}</p>
+                <p class="card-text">
+                    <small class="text-muted"> Publicado em: {{ artigo.data_publicacao }}
+                    </small>
+                </p>
+            </div>
+        </div>
+
+    {% empty %}
+        <p> Nenhum artigo nesta categoria ainda.</p>
+    {% endfor %}
+
+{% endblock %}
