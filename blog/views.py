@@ -15,7 +15,14 @@ def home(request):
 
 
 def sobre_nos(request):
-    return render(request, "blog/sobre.html")
+
+    categorias = Categoria.objects.all()
+
+    contexto = {
+        'lista_categorias': categorias,
+    }
+
+    return render(request, "blog/sobre.html", contexto)
 
 
 def categoria(request, categoria_id):

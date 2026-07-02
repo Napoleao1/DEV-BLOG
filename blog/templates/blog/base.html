@@ -25,6 +25,10 @@
                         <a class="nav-link" href="{% url 'home' %}">Início</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'sobre_nos' %}">Sobre</a>
+                    </li>
+
                     <!-- MENU DE CATEGORIAS DINÂMICO -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,10 +43,6 @@
                                 <li><span class="dropdown-item-text text-muted">Nenhuma categoria</span></li>
                             {% endfor %}
                         </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'sobre_nos' %}">Sobre</a>
                     </li>
                 </ul>
             </div>
