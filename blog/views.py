@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Artigo, Categoria
 
 
@@ -20,7 +20,7 @@ def sobre_nos(request):
 
 def categoria(request, categoria_id):
 
-    categoria = Categoria.objects.get(id=categoria_id)
+    categoria = get_object_or_404(Categoria, id=categoria_id)
     artigos = Artigo.objects.filter(categoria_id=categoria_id)
     categorias = Categoria.objects.all()
 
