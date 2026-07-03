@@ -1,25 +1,81 @@
 {% extends 'blog/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<style>
+    /* ===== Tema "código" da Home (mesmo visual da página Sobre) ===== */
+
+    :root {
+        --tech-accent: #22d3ee;   /* ciano */
+        --code-key:    #c586c0;   /* roxo (palavras-chave) */
+    }
+
+    /* Imagem de fundo + fonte estilo "código" */
+    body {
+        font-family: "Cascadia Code", "Fira Code", Consolas, "Courier New", ui-monospace, monospace;
+        background-color: transparent !important;
+        background-image:
+            linear-gradient(rgba(41, 36, 36, 0.35), rgba(34, 30, 30, 0.35)),
+            url("{% static 'blog/images/main.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    /* Título da página sobre o fundo escuro */
+    .titulo-pagina {
+        color: #fff;
+        text-shadow: 0 0 12px rgba(34, 211, 238, .35);
+    }
+
+    /* ===== Cartões com efeito "espelhado" (vidro escuro + gradiente) ===== */
+    .card-vidro {
+        background: linear-gradient(150deg, rgba(60, 63, 71, 0.13), rgba(25, 26, 29, 0.247));
+        backdrop-filter: blur(22px) saturate(150%);
+        -webkit-backdrop-filter: blur(22px) saturate(150%);
+        border: 1px solid rgba(255, 255, 255, .25) !important;
+        border-radius: 1rem;
+        color: #9aa4b2;
+        box-shadow: 0 .6rem 2rem rgba(0, 0, 0, .4),
+                    inset 0 1px 0 rgba(255, 255, 255, .22) !important;
+        transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .card-vidro:hover {
+        transform: translateY(-4px);
+        border-color: rgba(34, 211, 238, .55) !important;
+        box-shadow: 0 1rem 2.6rem rgba(0, 0, 0, .5),
+                    inset 0 1px 0 rgba(255, 255, 255, .22) !important;
+    }
+
+    /* Textos claros dentro do vidro escuro */
+    .card-vidro .card-title { color: #fff; text-shadow: 0 0 12px rgba(34, 211, 238, .35); }
+    .card-vidro .card-subtitle,
+    .card-vidro .text-muted { color: rgba(255, 255, 255, .72) !important; }
+</style>
+{% endblock %}
 
 {% block content %}
 
 
-    <h2>Ultimas notícias</h2>
+    <h2 class="titulo-pagina">Ultimas notícias</h2>
 
     {% for artigo in lista_artigos %}
-        <div class="card mb-4 shadow-sm">
+        <div class="card card-vidro mb-4 shadow-sm">
             <div class="card-body">
-                <h3 class="card-title text-sucess">{{ artigo.titulo }}</h3>
+                <h3 class="card-title">{{ artigo.titulo }}</h3>
                 <h6 class="card-subtitle mb-2 text-muted">Categoria: {{ artigo.categoria.nome }} | Autor: {{ artigo.autor }}</h6>
-                <p class="card-text"> {{ artigo.conteudo }}</p>
+                <p class="card-text"> {{ artigo.conteudo|truncatechars:100 }}</p>
                 <p class="card-text">
                     <small class="text-muted"> Publicado em: {{ artigo.data_publicacao }}
                     </small>
                 </p>
+                <a href="{% url 'artigo_detalhe' artigo.id %}" class="btn btn-primary btn-sm">Ler mais</a>
             </div>
         </div>
 
     {% empty %}
-        <p> Nenhuma notícia publicada ainda.</p>
+        <p class="titulo-pagina"> Nenhuma notícia publicada ainda.</p>
     {% endfor %}
 
 {% endblock %}
