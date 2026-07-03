@@ -38,3 +38,16 @@ def categoria(request, categoria_id):
     }
 
     return render(request, "blog/categoria.html", contexto)
+
+
+def artigo_detalhe(request, id):
+    categorias = Categoria.objects.all()
+
+    noticia = get_object_or_404(Artigo, id=id)
+
+    contexto = {
+        'lista_categorias': categorias,
+        'artigo': noticia,
+    }
+
+    return render(request, 'blog/artigo_detalhe.html', contexto)
