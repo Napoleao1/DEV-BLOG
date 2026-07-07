@@ -1,0 +1,115 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<style>
+    /* ===== Tema "código" (mesmo visual da Home e Sobre) ===== */
+
+    :root {
+        --tech-accent: #22d3ee;   /* ciano */
+        --code-key:    #c586c0;   /* roxo (palavras-chave) */
+    }
+
+    /* Imagem de fundo + fonte estilo "código" */
+    body {
+        font-family: "Cascadia Code", "Fira Code", Consolas, "Courier New", ui-monospace, monospace;
+        background-color: transparent !important;
+        background-image:
+            linear-gradient(rgba(41, 36, 36, 0.35), rgba(34, 30, 30, 0.35)),
+            url("{% static 'blog/images/main.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    /* ===== Cartão com efeito "espelhado" (vidro escuro + gradiente) ===== */
+    .card-vidro {
+        background: linear-gradient(150deg, rgba(60, 63, 71, 0.13), rgba(25, 26, 29, 0.247));
+        backdrop-filter: blur(22px) saturate(150%);
+        -webkit-backdrop-filter: blur(22px) saturate(150%);
+        border: 1px solid rgba(255, 255, 255, .25) !important;
+        border-radius: 1rem;
+        color: #9aa4b2;
+        box-shadow: 0 .6rem 2rem rgba(0, 0, 0, .4),
+                    inset 0 1px 0 rgba(255, 255, 255, .22) !important;
+    }
+
+    .card-vidro .card-title { color: #fff; text-shadow: 0 0 12px rgba(34, 211, 238, .35); }
+    .card-vidro p { color: rgba(255, 255, 255, .72); }
+
+    /* ===== Campos do formulário sobre o vidro escuro ===== */
+    .card-vidro .form-label {
+        color: var(--tech-accent);
+        font-weight: 600;
+    }
+    .card-vidro .form-control {
+        background: rgba(15, 16, 18, .45);
+        border: 1px solid rgba(255, 255, 255, .25);
+        border-radius: .5rem;
+        color: #fff;
+    }
+    .card-vidro .form-control::placeholder {
+        color: rgba(255, 255, 255, .4);
+    }
+    .card-vidro .form-control:focus {
+        background: rgba(15, 16, 18, .6);
+        border-color: var(--tech-accent);
+        box-shadow: 0 0 0 .2rem rgba(34, 211, 238, .2);
+        color: #fff;
+    }
+
+    /* Botão no tom ciano do tema */
+    .btn-enviar {
+        background: var(--tech-accent);
+        border: none;
+        color: #0f1012;
+        font-weight: 700;
+        border-radius: .5rem;
+        transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .btn-enviar:hover {
+        background: #67e8f9;
+        color: #0f1012;
+        transform: translateY(-2px);
+        box-shadow: 0 .4rem 1.2rem rgba(34, 211, 238, .35);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+
+            <div class="card card-vidro shadow-sm">
+                <div class="card-body p-4 p-md-5">
+
+                    <h2 class="card-title mb-2"><i class="bi bi-envelope-fill me-2"></i>Fale Conosco</h2>
+                    <p class="mb-4">Envie-nos uma mensagem, crítica ou sugestão.</p>
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        {% for field in form %}
+                            <div class="mb-3">
+                                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                                {{ field }}
+                                {% for erro in field.errors %}
+                                    <div class="text-warning small mt-1">{{ erro }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+
+                        <button type="submit" class="btn btn-enviar mt-2 px-4">
+                            <i class="bi bi-send-fill me-1"></i> Enviar Mensagem
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

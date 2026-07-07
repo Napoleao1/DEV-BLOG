@@ -1,5 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Artigo, Categoria
+from .forms import ContatoForm
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializer import ArtigoSerializer, CategoriaSerializer
 
 
 def home(request):
@@ -51,3 +55,42 @@ def artigo_detalhe(request, id):
     }
 
     return render(request, 'blog/artigo_detalhe.html', contexto)
+
+
+def fale_conosco(request):
+    categorias = Categoria.objects.all()
+
+    if request.method == "POST":
+        formulario = ContatoForm(request.POST)
+
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('home')
+
+    else:
+        formulario = ContatoForm()
+
+    contexto = {
+        'lista_categorias': categorias,
+        'form': formulario,
+    }
+
+    return render(request, 'blog/contato.html', contexto)
+
+
+@api_view(['GET'])
+def api_listar_artigos(request):
+    artigo = Artigo.objects.all()
+
+    serializer = ArtigoSerializer(artigo, many=True)
+
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def api_listar_categorias(request):
+    categoria = Categoria.objects.all()
+
+    serializer = CategoriaSerializer(categoria, many=True)
+
+    return Response(serializer.data)
