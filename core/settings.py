@@ -10,8 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 from datetime import timedelta
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +25,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2)x&h9-6a@b(xxnv-*$c+an*!o=v99%h&vr@#7h4-jy@jh-zf6'
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+DEBUG = os.getenv('DEBUG') == 'True'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 
 
 # Application definition
@@ -79,12 +85,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # O NOVO MOTOR (MySQL)
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'devblog_db',        # O banco que criamos no Workbench
-        'USER': 'root',              # O superusuário padrão
-        'PASSWORD': 'senacrs',       # A senha oficial do nosso laboratório
-        'HOST': 'localhost',         # O servidor roda nesta própria máquina
-        'PORT': '3307',              # A porta padrão do MySQL
+        'ENGINE': os.getenv('DATABASE_ENGINE'),
+        'NAME': os.getenv('DATABASE_NAME'),        # O banco que criamos no Workbench
+        'USER': os.getenv('DATABASE_USER'),              # O superusuário padrão
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),       # A senha oficial do nosso laboratório
+        'HOST': os.getenv('DATABASE_HOST'),         # O servidor roda nesta própria máquina
+        'PORT': os.getenv('DATABASE_PORT'),              # A porta padrão do MySQL
     }
 }
 
