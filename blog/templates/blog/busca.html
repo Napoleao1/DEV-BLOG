@@ -1,9 +1,11 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 
+{% block title %}Busca: {{ termo }} | DevBlog{% endblock %}
+
 {% block extra_head %}
 <style>
-    /* ===== Tema "código" da página de Categoria (mesmo visual da página Sobre) ===== */
+    /* ===== Tema "código" da página de Busca (mesmo visual da Home) ===== */
 
     :root {
         --tech-accent: #22d3ee;   /* ciano */
@@ -57,7 +59,13 @@
 
 {% block content %}
 
-    <h2 class="titulo-pagina">Categoria: {{ categoria.nome }}</h2>
+    {% if termo %}
+        <h2 class="titulo-pagina">Resultados para: "{{ termo }}"</h2>
+        <p class="titulo-pagina"><small>{{ lista_artigos|length }} artigo{{ lista_artigos|length|pluralize }} encontrado{{ lista_artigos|length|pluralize }}</small></p>
+    {% else %}
+        <h2 class="titulo-pagina">Busca de artigos</h2>
+        <p class="titulo-pagina"><small>Digite um termo no campo de busca acima.</small></p>
+    {% endif %}
 
     {% for artigo in lista_artigos %}
         <div class="card card-vidro mb-4 shadow-sm">
@@ -77,7 +85,9 @@
         </div>
 
     {% empty %}
-        <p class="titulo-pagina"> Nenhum artigo nesta categoria ainda.</p>
+        {% if termo %}
+            <p class="titulo-pagina"> Nenhum artigo encontrado para "{{ termo }}".</p>
+        {% endif %}
     {% endfor %}
 
 {% endblock %}
