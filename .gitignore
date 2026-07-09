@@ -219,3 +219,6 @@ __marimo__/
 
 # Uploads de usuarios (Django media)
 media/
+
+# Arquivos estaticos coletados pelo collectstatic
+staticfiles/
