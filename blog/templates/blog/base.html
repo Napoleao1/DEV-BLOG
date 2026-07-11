@@ -58,6 +58,34 @@
             50% { opacity: 0; }
         }
 
+        /* ===== Navbar e footer com o mesmo "vidro" dos cards de notícia ===== */
+        .barra-vidro {
+            background: linear-gradient(150deg, rgba(60, 63, 71, 0.20), rgba(25, 26, 29, 0.45)) !important;
+            backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
+        }
+        nav.barra-vidro { border-bottom: 1px solid rgba(255, 255, 255, .18); }
+        footer.barra-vidro {
+            border-top: 1px solid rgba(255, 255, 255, .18);
+            background: linear-gradient(150deg, rgba(60, 63, 71, 0.20), rgba(25, 26, 29, 0.45)) !important;
+        }
+
+        /* Botão com o mesmo vidro dos cards */
+        .btn-vidro {
+            background: linear-gradient(150deg, rgba(60, 63, 71, 0.20), rgba(25, 26, 29, 0.45));
+            backdrop-filter: blur(12px) saturate(150%);
+            -webkit-backdrop-filter: blur(12px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, .25);
+            color: #fff;
+            transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+        }
+        .btn-vidro:hover {
+            color: #fff;
+            border-color: rgba(34, 211, 238, .55);
+            box-shadow: 0 .4rem 1.2rem rgba(0, 0, 0, .4);
+            transform: translateY(-2px);
+        }
+
         /* ===== Vídeo de fundo (todas as páginas) ===== */
         .video-fundo {
             position: fixed;
@@ -113,7 +141,7 @@
     <div class="video-overlay"></div>
 
     <!-- MENU SUPERIOR BOOTSTRAP -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark barra-vidro">
         <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}"><span class="brand-foguete">🚀</span> <span class="brand-nome">DevBlog</span><span class="brand-cursor">_</span></a>
             <button class="navbar-toggler" type="button"
@@ -170,7 +198,7 @@
     </main>
 
     <!-- RODAPÉ -->
-    <footer class="bg-dark text-white text-center py-4 mt-5">
+    <footer class="barra-vidro text-white text-center py-4 mt-5">
         <p class="mb-0">© 2026 Desenvolvido por Ernani. Todos os direitos reservados.</p>
     </footer>
 
