@@ -57,6 +57,28 @@
         @keyframes brand-pisca {
             50% { opacity: 0; }
         }
+
+        /* ===== Cursor tecnológico: brilho ciano que segue o mouse ===== */
+        .cursor-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(34, 211, 238, .55) 0%, rgba(34, 211, 238, 0) 70%);
+            border: 1px solid rgba(34, 211, 238, .6);
+            box-shadow: 0 0 12px rgba(34, 211, 238, .7);
+            pointer-events: none;   /* nunca atrapalha cliques */
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: transform .08s ease-out, opacity .2s ease;
+            mix-blend-mode: screen;
+        }
+        /* Em telas de toque não faz sentido, então escondemos */
+        @media (hover: none) {
+            .cursor-glow { display: none; }
+        }
     </style>
 
     {% block extra_head %}{% endblock %}
@@ -127,5 +149,39 @@
 
     <!-- Bootstrap 5 JS (necessário para a navbar responsiva) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Cursor tecnológico: brilho ciano que segue o mouse -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <script>
+        (function () {
+            const glow = document.getElementById('cursorGlow');
+            let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+
+            document.addEventListener('mousemove', function (e) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            // Movimento suave com leve atraso (efeito de "rastro")
+            function anima() {
+                glowX += (mouseX - glowX) * 0.18;
+                glowY += (mouseY - glowY) * 0.18;
+                glow.style.left = glowX + 'px';
+                glow.style.top = glowY + 'px';
+                requestAnimationFrame(anima);
+            }
+            anima();
+
+            // Cresce um pouco ao passar sobre links e botões
+            document.querySelectorAll('a, button').forEach(function (el) {
+                el.addEventListener('mouseenter', function () {
+                    glow.style.transform = 'translate(-50%, -50%) scale(1.8)';
+                });
+                el.addEventListener('mouseleave', function () {
+                    glow.style.transform = 'translate(-50%, -50%) scale(1)';
+                });
+            });
+        })();
+    </script>
 </body>
 </html>
