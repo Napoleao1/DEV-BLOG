@@ -5,17 +5,31 @@ from .forms import ContatoForm, ComentarioForm
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from django.core.paginator import Paginator
 
 from .serializer import ArtigoSerializer, CategoriaSerializer
 
 
 def home(request):
 
-    noticias = Artigo.objects.all()
+    noticias = Artigo.objects.all().order_by('-id')
     categorias = Categoria.objects.all()
+
+    # 1. Captura o que o usuário digitou na busca
+    busca = request.GET.get('q')
+
+    # 2. Filtra o banco se houver termo de busca
+    if busca:
+        noticias = noticias.filter(titulo__icontains=busca)
+
+    paginator = Paginator(noticias, 5)
+    numero_da_pagina = request.GET.get('page')
+    page_obj = paginator.get_page(numero_da_pagina)
+
     contexto = {
-        'lista_artigos': noticias,
+        'lista_artigos': page_obj,
         'lista_categorias': categorias,
+        'termo': busca,
     }
 
     return render(request, "blog/index.html", contexto)

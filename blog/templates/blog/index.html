@@ -16,7 +16,7 @@
         background-color: transparent !important;
         background-image:
             linear-gradient(rgba(41, 36, 36, 0.35), rgba(34, 30, 30, 0.35)),
-            url("{% static 'blog/images/main.jpg' %}");
+            url("{% static 'blog/images/gif-background.gif' %}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -80,5 +80,22 @@
     {% empty %}
         <p class="titulo-pagina"> Nenhuma notícia publicada ainda.</p>
     {% endfor %}
+
+    <!-- Botões de Paginação Bootstrap -->
+    <div class="pagination justify-content-center mt-4">
+        {% if lista_artigos.has_previous %}
+            <a href="?page=1" class="btn btn-outline-primary btn-sm mx-1">&laquo; Primeira</a>
+            <a href="?page={{ lista_artigos.previous_page_number }}" class="btn btn-outline-primary btn-sm mx-1">Anterior</a>
+        {% endif %}
+
+        <span class="current fw-bold mx-3 mt-1">
+            Página {{ lista_artigos.number }} de {{ lista_artigos.paginator.num_pages }}.
+        </span>
+
+        {% if lista_artigos.has_next %}
+            <a href="?page={{ lista_artigos.next_page_number }}" class="btn btn-outline-primary btn-sm mx-1">Próxima</a>
+            <a href="?page={{ lista_artigos.paginator.num_pages }}" class="btn btn-outline-primary btn-sm mx-1">Última &raquo;</a>
+        {% endif %}
+    </div>
 
 {% endblock %}
