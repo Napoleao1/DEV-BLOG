@@ -17,10 +17,10 @@
         --code-num:    #b5cea8;   /* verde  (números)        */
     }
 
-    /* Imagem de fundo + fonte estilo "código" em toda a página Sobre */
+    /* Fonte estilo "código" + imagem de fundo (fallback enquanto o vídeo carrega) */
     body {
         font-family: "Cascadia Code", "Fira Code", Consolas, "Courier New", ui-monospace, monospace;
-        background-color: transparent !important;
+        background-color: #191a1d !important;
         background-image:
             linear-gradient(rgba(41, 36, 36, 0.35), rgba(34, 30, 30, 0.35)),
             url("{% static 'blog/images/main.jpg' %}");
