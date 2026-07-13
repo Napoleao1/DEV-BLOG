@@ -64,7 +64,11 @@
             backdrop-filter: blur(20px) saturate(150%);
             -webkit-backdrop-filter: blur(20px) saturate(150%);
         }
-        nav.barra-vidro { border-bottom: 1px solid rgba(255, 255, 255, .18); }
+        nav.barra-vidro {
+            border-bottom: 1px solid rgba(255, 255, 255, .18);
+            position: relative;
+            z-index: 1030;   /* mantém a navbar (e o dropdown) acima do conteúdo com vidro */
+        }
         footer.barra-vidro {
             border-top: 1px solid rgba(255, 255, 255, .18);
             background: linear-gradient(150deg, rgba(60, 63, 71, 0.20), rgba(25, 26, 29, 0.45)) !important;
