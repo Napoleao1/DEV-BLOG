@@ -153,7 +153,7 @@
 <body class="d-flex flex-column min-vh-100">
 
     <!-- Vídeo de fundo em todas as páginas (muted é obrigatório pro autoplay) -->
-    <video class="video-fundo" autoplay muted loop playsinline preload="auto">
+    <video class="video-fundo" id="videoFundo" autoplay muted playsinline preload="auto">
         <source src="{% static 'blog/videos/fundo.mp4' %}" type="video/mp4">
     </video>
     <div class="video-overlay"></div>
@@ -225,6 +225,35 @@
 
     <!-- Bootstrap 5 JS (necessário para a navbar responsiva) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Vídeo de fundo em "boomerang": toca pra frente e volta de ré, sem corte no loop -->
+    <script>
+        (function () {
+            const v = document.getElementById('videoFundo');
+            if (!v) return;
+            let revertendo = false;
+
+            // Passo a passo de ré, quadro a quadro, quando chega no fim
+            function passoDeRe() {
+                if (!revertendo) return;
+                v.currentTime = Math.max(0, v.currentTime - 0.04);
+                if (v.currentTime <= 0.04) {
+                    revertendo = false;
+                    v.play();
+                    return;
+                }
+                requestAnimationFrame(passoDeRe);
+            }
+
+            v.addEventListener('timeupdate', function () {
+                if (!revertendo && v.duration && v.currentTime >= v.duration - 0.15) {
+                    revertendo = true;
+                    v.pause();
+                    passoDeRe();
+                }
+            });
+        })();
+    </script>
 
     <!-- Cursor tecnológico: brilho ciano que segue o mouse -->
     <div class="cursor-glow" id="cursorGlow"></div>
