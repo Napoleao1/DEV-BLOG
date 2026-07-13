@@ -74,6 +74,19 @@
             background: linear-gradient(150deg, rgba(60, 63, 71, 0.20), rgba(25, 26, 29, 0.45)) !important;
         }
 
+        /* Link do GitHub no rodapé */
+        .link-github {
+            color: rgba(255, 255, 255, .75);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color .2s ease, text-shadow .2s ease;
+        }
+        .link-github:hover {
+            color: #22d3ee;
+            text-shadow: 0 0 10px rgba(34, 211, 238, .5);
+        }
+        .link-github i { font-size: 1.15rem; }
+
         /* Botão com o mesmo vidro dos cards */
         .btn-vidro {
             background: linear-gradient(150deg, rgba(60, 63, 71, 0.20), rgba(25, 26, 29, 0.45));
@@ -203,7 +216,10 @@
 
     <!-- RODAPÉ -->
     <footer class="barra-vidro text-white text-center py-4 mt-5">
-        <p class="mb-0">© 2026 Desenvolvido por Ernani. Todos os direitos reservados.</p>
+        <p class="mb-2">© 2026 Desenvolvido por Ernani. Todos os direitos reservados.</p>
+        <a href="https://github.com/Napoleao1" target="_blank" rel="noopener" class="link-github">
+            <i class="bi bi-github"></i> github.com/Napoleao1
+        </a>
     </footer>
 
     <!-- Bootstrap 5 JS (necessário para a navbar responsiva) -->
